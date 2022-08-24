@@ -1,0 +1,11 @@
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\SSRSWebApi.exe
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\appsettings.json
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\SSRSWebApi.dll
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\SSRSWebApi.deps.json
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\SSRSWebApi.runtimeconfig.json
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\SSRSWebApi.pdb
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\dev\SSRSWebApi\SSRSWebApi\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll
