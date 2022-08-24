@@ -89,3 +89,13 @@ Den totala tiden av presentation får ni distribuera som ni vill men den måste 
   - Demo
   - Hur löser ni denna utmaning?
   - Vad är nästa steg, rekommendationer för framtiden?
+
+# Cloud Server
+https://ssrswebapi20220824153938.azurewebsites.net/swagger/index.html
+
+    public enum AttributeTypes : int
+    {
+        TankLevel = 0,
+        AlarmLevel = 1,
+        Reserved = 2,
+    }
