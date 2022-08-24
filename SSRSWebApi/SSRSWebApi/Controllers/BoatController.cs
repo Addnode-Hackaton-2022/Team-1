@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SSRSWebApi.Common;
 using SSRSWebApi.Domain;
 using SSRSWebApi.Models;
+using DomainLogic;
 
 namespace SSRSWebApi.Controllers
 {
@@ -9,47 +9,23 @@ namespace SSRSWebApi.Controllers
     [Route("[controller]")]
     public class BoatController : ControllerBase
     {
+        private readonly IInmemoryStorage _inmemoryStorage;
+        public BoatController(IInmemoryStorage inmemoryStorage)
+        {
+            _inmemoryStorage = inmemoryStorage;
+        }
         [HttpPost]
         [Route("update")]
         public BoatModel BoatUpdate([FromBody] BoatModel model)
         {
-            if (InmemoryStorage.Boats.TryGetValue(model.Id, out var boat))
-            {
-                foreach(var attr in model.BoatAttributes)
-                {
-                    var sourceAttr = boat.BoatAttributes.FirstOrDefault(x => x.Type == attr.Type);
-                    if (sourceAttr == null)
-                    {
-                        boat.BoatAttributes.Add(new BoatAttribute
-                        {
-                            Type = attr.Type,
-                            Value = attr.Value,
-                            Timestamp = attr.Timestamp
-                        });
-                    }
-                    else
-                    {
-                        sourceAttr.MergeAttribute(attr);
-                    }
-                }
-            }
-            else
-            {
-                InmemoryStorage.Boats[model.Id] = model;
-            }
-            var sourceBoat = InmemoryStorage.Boats[model.Id];
-            var result = new BoatModel
-            {
-                Id = model.Id,
-                BoatAttributes = sourceBoat.BoatAttributes.Where(x => !x.Type.IsReadOnly()).ToList()
-            };
-            return result;
+            var useCase = new UpdateBoatUseCase(_inmemoryStorage);
+            return useCase.UpdateBoat(model);
         }
         [HttpGet]
         [Route("all")]
         public List<BoatModel> GetAllBoats()
         {
-            return InmemoryStorage.Boats.Values.ToList();
+            return _inmemoryStorage.GetAll();
         }
     }
 }

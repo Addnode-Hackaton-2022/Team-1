@@ -1,6 +1,6 @@
 ﻿using SSRSWebApi.Models;
 
-namespace SSRSWebApi.Common
+namespace DomainLogic.Common
 {
     public static class Extensions
     {
