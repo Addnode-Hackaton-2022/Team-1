@@ -5,3 +5,8 @@
 # dotenv environment variables file
 .env
 .env.test
+SSRSWebApi/SSRSWebApi/bin/Debug/net6.0/appsettings.Development.json
+SSRSWebApi/.vs/
+SSRSWebApi/SSRSWebApi/bin/
+SSRSWebApi/SSRSWebApi/obj/
+SSRSWebApi/TestProject/obj/
