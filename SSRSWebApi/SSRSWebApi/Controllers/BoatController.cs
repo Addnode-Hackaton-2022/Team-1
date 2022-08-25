@@ -2,6 +2,7 @@
 using SSRSWebApi.Domain;
 using SSRSWebApi.Models;
 using DomainLogic;
+using Microsoft.AspNetCore.Cors;
 
 namespace SSRSWebApi.Controllers
 {
@@ -16,6 +17,7 @@ namespace SSRSWebApi.Controllers
         }
         [HttpPost]
         [Route("update")]
+        [DisableCors]
         public BoatModel BoatUpdate([FromBody] BoatModel model)
         {
             var useCase = new UpdateBoatUseCase(_inmemoryStorage);
@@ -23,6 +25,7 @@ namespace SSRSWebApi.Controllers
         }
         [HttpGet]
         [Route("all")]
+        [DisableCors]
         public List<BoatModel> GetAllBoats()
         {
             return _inmemoryStorage.GetAll();
