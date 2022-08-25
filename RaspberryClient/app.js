@@ -1,3 +1,5 @@
+'use strict'
+
 const socket = require("./socket.js");
 const cloud = require("./cloud.js");
 const functions = require("./functions.js");

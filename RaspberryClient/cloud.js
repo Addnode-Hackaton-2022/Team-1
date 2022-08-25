@@ -1,3 +1,5 @@
+'use strict'
+
 require('dotenv').config();
 const axios = require('axios');
 const apiUrl = process.env.API_URL;
