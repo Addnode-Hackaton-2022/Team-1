@@ -216,7 +216,7 @@ public class BoatSimulatorUI extends JFrame
         iBoats.clear();
         for (int i = 0; i < count; i++)
         {
-            iBoats.add(new Boat(boatNames[rand.nextInt(count)], this));
+            iBoats.add(new Boat(boatNames[rand.nextInt(boatNames.length)], this));
         }
     }
 
