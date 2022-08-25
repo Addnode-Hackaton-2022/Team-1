@@ -2,6 +2,7 @@ let ws;
 let isConnected = false;
 const delta = 3.92; // 256/65
 
+
 function connect() {
   const wdu_ip = "172.16.64.133";
   ws = new WebSocket("ws://" + wdu_ip + "/ws");
@@ -98,6 +99,5 @@ function setAlarmLevel() {
     size: 5,
   };
   const json = JSON.stringify(message);
-  console.log(json);
   ws.send(json);
 }

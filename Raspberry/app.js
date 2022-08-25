@@ -1,8 +1,8 @@
 const socket = require("./socket.js");
 const cloud = require("./cloud.js");
+const functions = require("./functions.js");
 
-
-socket.readAttributeConfig();
+functions.readAttributeConfig();
 socket.connect();
 
 start()

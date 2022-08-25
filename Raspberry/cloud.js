@@ -1,10 +1,11 @@
 require('dotenv').config();
 const axios = require('axios');
 const apiUrl = process.env.API_URL;
+const functions = require("./functions.js");
+const socket = require("./socket.js");
 
 async function postDataToCloud(boatAttributes) {
     const data = JSON.stringify(boatAttributes);
-    console.log(data);
     let res = await axios.post(
         `${apiUrl}/boat/update`,
         data, {
@@ -13,8 +14,16 @@ async function postDataToCloud(boatAttributes) {
             }
     }
     );
-
+	readDataFromCloud(res.data);
     return res.data;
+}
+
+function readDataFromCloud(response) {
+	response.boatAttributes.forEach(attribute => {
+		if(functions.getAttributeNameFromCloud(attribute.type) === "alarm_level") {
+			socket.setAlarmLevel(attribute.value);
+		}
+    })
 }
 
 module.exports = {
