@@ -106,6 +106,8 @@ Se ovan och PPT.
 - Vad är nästa steg?
    - Deploya och testa lösning till en RasberryPi på en faktisk båt.
    - Aktivera flera "kanaler" och anpassa monitor verktyget att visuallisera mer data.
+   - Slå på CORS på backend. Lägg på autentisering, slå av Swagger och "säkra" backend lösningen.
+   - Persistera data i Cloud lösningen i en databas. Idag hålls bara data i minnet.
 
 
 - Några rekommendationer för framtiden?
@@ -136,3 +138,6 @@ Den totala tiden av presentation får ni distribuera som ni vill men den måste 
 # Cloud Server med Swagger 
 
 https://ssrswebapi20220824153938.azurewebsites.net/swagger/index.html
+
+# Monitor tool
+https://ambitious-flower-010394b03.1.azurestaticapps.net/

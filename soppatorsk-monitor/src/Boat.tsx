@@ -12,7 +12,8 @@ import {
   notification,
   Row,
   Space,
-  Statistic
+  Statistic,
+  Tooltip
 } from 'antd';
 import moment from 'moment';
 import { useState } from 'react';
@@ -37,6 +38,11 @@ export const Boat = ({ boatId }: { boatId: string }) => {
     boatQuery.data[0].boatAttributes.find(
       attribute => attribute.type === BoatAttributeTypes.AlarmLevel
     );
+
+  const isFuelLower =
+    tankLevel &&
+    alarmLevel &&
+    parseInt(tankLevel.value) < parseInt(alarmLevel.value);
 
   const onSubmit = async (values: { level: string }) => {
     if (!values.level) return;
@@ -75,6 +81,11 @@ export const Boat = ({ boatId }: { boatId: string }) => {
             suffix={
               <Space>
                 %<BoatTag timestamp={tankLevel?.timestamp} />
+                {isFuelLower && (
+                  <Tooltip title="Fuel is lower than alarm level">
+                    <WarningOutlined style={{ color: 'yellow' }} />
+                  </Tooltip>
+                )}
               </Space>
             }
           />

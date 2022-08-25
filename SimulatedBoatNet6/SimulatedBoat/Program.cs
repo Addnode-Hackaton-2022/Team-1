@@ -1,7 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using BoatAPI;
 
-Console.WriteLine("Starting two boats, Ubåten and Tankaren");
+Console.WriteLine("Starting three boats, Ubåten, Tankaren and Soppatorsk");
 var httpClient = new HttpClient();
 var bac = new BoatAPIClient("https://ssrswebapi20220824153938.azurewebsites.net/", httpClient);
 
@@ -44,7 +44,7 @@ while (1 == 1)
     });
 
     var soppatorsk = new BoatModel();
-    soppatorsk.Id = "Tankaren";
+    soppatorsk.Id = "Soppatorsk";
     soppatorsk.BoatAttributes = new List<BoatAttribute>();
     soppatorsk.BoatAttributes.Add(new BoatAttribute()
     {
