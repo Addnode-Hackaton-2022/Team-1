@@ -31,5 +31,6 @@ namespace SSRSWebApi.Models
         [Required]
         public string Id { get; set; }
         public List<BoatAttribute> BoatAttributes { get; set; }
+        public DateTimeOffset Timestamp { get; set; }
     }
 }

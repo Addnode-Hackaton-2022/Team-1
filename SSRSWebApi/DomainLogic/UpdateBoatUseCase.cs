@@ -56,10 +56,12 @@ namespace DomainLogic
                 _inmemoryStorage.UpsertBoat(cloned);
             }
             var sourceBoat = _inmemoryStorage.GetBoatModel(model.Id);
+            sourceBoat.Timestamp = DateTimeOffset.UtcNow;
             var result = new BoatModel
             {
                 Id = model.Id,
-                BoatAttributes = sourceBoat.BoatAttributes.Where(x => !x.Type.IsReadOnly()).ToList()
+                BoatAttributes = sourceBoat.BoatAttributes.Where(x => !x.Type.IsReadOnly()).ToList(),
+                Timestamp = sourceBoat.Timestamp
             };
             return result;
         }
