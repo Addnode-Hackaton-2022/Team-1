@@ -1,0 +1,17 @@
+[
+  {
+    "cloudAttributeId": 0,
+    "boatAttributeId": 1,
+    "name": "tank_level"
+  },
+  {
+    "cloudAttributeId": 1,
+    "boatAttributeId": 5,
+    "name": "alarm_level"
+  },
+  {
+    "cloudAttributeId": 2,
+    "boatAttributeId": 7,
+    "name": "reserved"
+  }
+] 
