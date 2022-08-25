@@ -1,15 +1,12 @@
 'use strict'
 
 require('dotenv').config();
-const delta = 3.92; // 256/65
+const delta = 256/65;
 const WebSocket = require('ws');
-const cloud = require('./cloud.js')
-const fs = require('fs');
+const functions = require("./functions.js");
 
 let ws;
 let isConnected = false;
-let attributeTranslation;
-
 
 var data = {
     id: process.env.BOAT_ID,
@@ -19,75 +16,18 @@ var data = {
 function addToData(value, name) {
     let exists = false;
     data.boatAttributes.forEach(attribute => {
-        if (getAttributeNameFromCloud(attribute.type) === name) {
-            console.log('Finns redan!')
-            attribute.type = getCloudAttributeIdByName(name);
+        if (functions.getAttributeNameFromCloud(attribute.type) === name) {
+            attribute.type = functions.getCloudAttributeIdByName(name);
             attribute.value = value.toString();
             attribute.timestamp = new Date().toISOString();
             exists = true;
         }
     })
     if (!exists) {
-        console.log('Finns ej!')
-        let cloudAttributeId = getCloudAttributeIdByName(name);
+        let cloudAttributeId = functions.getCloudAttributeIdByName(name);
         console.log(cloudAttributeId);
         data.boatAttributes.push({ type: cloudAttributeId, value: value.toString(), timestamp: new Date().toISOString() })
     }
-}
-
-function readAttributeConfig() {
-    let rawdata = fs.readFileSync('attributeConfig.json');
-    attributeTranslation = JSON.parse(rawdata);
-}
-
-function getCloudAttributeIdByName(name) {
-    let result;
-    attributeTranslation.forEach(attribute => {
-        if (attribute.name === name) {
-            result = attribute.cloudAttributeId;
-        }
-    })
-    return result;
-}
-
-function getCloudAttributeId(boatAttributeId) {
-    let result;
-    attributeTranslation.forEach(attribute => {
-        if (attribute.boatAttributeId === boatAttributeId) {
-            result = attribute.cloudAttributeId;
-        }
-    })
-    return result;
-}
-
-function getBoatAttributeId(cloudAttributeId) {
-    let result;
-    attributeTranslation.forEach(attribute => {
-        if (attribute.cloudAttributeId === cloudAttributeId) {
-            result = attribute.boatAttributeId;
-        }
-    })
-    return result;
-}
-
-function getAttributeNameFromLocal(boatAttributeId) {
-    let result;
-    attributeTranslation.forEach(attribute => {
-        if (attribute.boatAttributeId === boatAttributeId) {
-            result = attribute.name;
-        }
-    })
-    return result;
-}
-
-function getAttributeNameFromCloud(cloudAttributeId) {
-    let result;
-    attributeTranslation.forEach(attribute => {
-        if (attribute.cloudAttributeId === cloudAttributeId) {
-            result = attribute.name;
-        }
-    })
-    return result;
 }
 
 function connect() {
@@ -97,7 +37,7 @@ function connect() {
         console.log("onopen: " + JSON.stringify(e));
         isConnected = true;
 
-        console.log("CloudID: " + getCloudAttributeId(5));
+        console.log("CloudID: " + functions.getCloudAttributeId(5));
     };
 
     ws.onclose = function ws_close(e) {
@@ -116,7 +56,7 @@ function connect() {
         //const test_level = 7;
 
         const command = parsed.data[0];
-        let attributeName = getAttributeNameFromLocal(command);
+        let attributeName = functions.getAttributeNameFromLocal(command);
         switch (attributeName) {
             case "alarm_level":
                 const v2 = parsed.data[5];
@@ -155,12 +95,31 @@ function connect() {
     };
 }
 
+function setAlarmLevel(val) {
+	const message = {
+		data: [4, 0, 0, parseInt(val), 0],
+		messagecmd: 3,
+		messagetype: 17,
+		size: 5,
+	};
+	const json = JSON.stringify(message);
+	addToData(val, "alarm_level");
+	if(ws.readyState === WebSocket.OPEN){
+		ws.send(json);
+	}
+	else {
+		setTimeout(() => {
+			setAlarmLevel(val)
+		}, 2000)
+	}
+}
+
 function getData() {
     return data;
 }
 
 module.exports = {
     connect,
-    readAttributeConfig,
-    getData
+    getData,
+	setAlarmLevel
 }

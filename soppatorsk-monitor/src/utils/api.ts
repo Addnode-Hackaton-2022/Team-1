@@ -10,9 +10,12 @@ export const useFetchAllBoats = (getOnlyOnce: boolean = false) => {
     ? {
         refetchOnMount: false,
         refetchOnWindowFocus: false,
-        staleTime: Infinity
+        staleTime: Infinity,
+        refetchInterval: false
       }
-    : {};
+    : {
+        refetchInterval: 500
+      };
 
   return useQuery<TBoat[], Error>(
     'fetchAllboats',

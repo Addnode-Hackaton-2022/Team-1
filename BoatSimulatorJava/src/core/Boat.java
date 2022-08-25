@@ -65,5 +65,4 @@ public class Boat
     {
         return iDirection;
     }
-
 }

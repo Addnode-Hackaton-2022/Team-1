@@ -14,11 +14,8 @@ import { useState } from 'react';
 import { Boat } from './Boat';
 import { BoatList } from './BoatList';
 import { BoatMapWrapper } from './BoatMap';
-import { useFetchAllBoats } from './utils/api';
 
 function App() {
-  const boatsQuery = useFetchAllBoats();
-  // const [boats, setBoats] = useState<TBoat[]>([]);
   const [activeBoat, setActiveBoat] = useState<string>();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -36,16 +33,11 @@ function App() {
     if (!values.ids) return;
 
     try {
-      // const fetchedBoats = await fetchBoats(values.ids);
-      // setBoats(fetchedBoats);
+      //TODO
     } catch (error) {
       console.error(error);
     }
   };
-
-  if (!boatsQuery.data) return <div>Loading...</div>;
-
-  if (boatsQuery.isLoading) return <div>Loading...</div>;
 
   return (
     <Row justify="center">
@@ -89,7 +81,6 @@ function App() {
           <Col span={16}>
             <Card>
               <BoatList
-                boats={boatsQuery.data}
                 onActiveBoatCallback={(boatId: string) => setActiveBoat(boatId)}
               />
             </Card>
@@ -123,4 +114,3 @@ function App() {
 }
 
 export default App;
-
