@@ -1,24 +1,29 @@
 import { List } from 'antd';
 import { BoatListItem } from './BoatListItem';
-import { TBoat } from './utils/boatArrayMock';
+import { useFetchAllBoats } from './utils/api';
 
 export const BoatList = ({
-  boats,
   onActiveBoatCallback
 }: {
-  boats: TBoat[];
   onActiveBoatCallback: (boatId: string) => void;
-}) => (
-  <List
-    dataSource={boats}
-    renderItem={boat => (
-      <div
-        className="boatListItem"
-        key={boat.id}
-        onClick={() => onActiveBoatCallback(boat.id)}
-      >
-        <BoatListItem boat={boat} />
-      </div>
-    )}
-  />
-);
+}) => {
+  const boatsQuery = useFetchAllBoats();
+  if (!boatsQuery.data) return <div>Loading...</div>;
+
+  if (boatsQuery.isLoading) return <div>Loading...</div>;
+
+  return (
+    <List
+      dataSource={boatsQuery.data}
+      renderItem={boat => (
+        <div
+          className="boatListItem"
+          key={boat.id}
+          onClick={() => onActiveBoatCallback(boat.id)}
+        >
+          <BoatListItem boat={boat} />
+        </div>
+      )}
+    />
+  );
+};
