@@ -25,7 +25,6 @@ function addToData(value, name) {
     })
     if (!exists) {
         let cloudAttributeId = functions.getCloudAttributeIdByName(name);
-        console.log(cloudAttributeId);
         data.boatAttributes.push({ type: cloudAttributeId, value: value.toString(), timestamp: new Date().toISOString() })
     }
 }
@@ -34,17 +33,10 @@ function connect() {
     ws = new WebSocket(`ws://${process.env.WDU_IP}/ws`);
 
     ws.onopen = function ws_open(e) {
-        console.log("onopen: " + JSON.stringify(e));
         isConnected = true;
-
-        console.log("CloudID: " + functions.getCloudAttributeId(5));
     };
 
     ws.onclose = function ws_close(e) {
-        console.log("onclose: " + e);
-        if (isConnected) {
-            console.log("reconnect");
-        }
         connect();
     };
 
