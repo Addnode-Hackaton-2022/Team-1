@@ -1,0 +1,21 @@
+@import 'antd/dist/antd.dark.css';
+@import 'https://js.arcgis.com/4.24/@arcgis/core/assets/esri/themes/dark/main.css';
+
+body {
+  background: #0f0f0f;
+}
+
+.boatListItem {
+  padding: 0.5em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.boatListItem:hover {
+  background: #1890ff66;
+}
+
+.viewDiv {
+  height: 100%;
+}
