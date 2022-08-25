@@ -43,8 +43,26 @@ while (1 == 1)
         Value = "20"
     });
 
+    var soppatorsk = new BoatModel();
+    soppatorsk.Id = "Tankaren";
+    soppatorsk.BoatAttributes = new List<BoatAttribute>();
+    soppatorsk.BoatAttributes.Add(new BoatAttribute()
+    {
+        Timestamp = DateTimeOffset.UtcNow,
+        Type = BoatAttributeType._0,
+        Value = 0.ToString()
+    });
+
+    soppatorsk.BoatAttributes.Add(new BoatAttribute()
+    {
+        Timestamp = DateTimeOffset.UtcNow,
+        Type = BoatAttributeType._1,
+        Value = "1"
+    });
+
     bac.UpdateAsync(b);
     bac.UpdateAsync(t);
+    bac.UpdateAsync(soppatorsk);
 
     while (fuel > 0)
     {
@@ -57,8 +75,14 @@ while (1 == 1)
         var tAttribute = t.BoatAttributes.Single(ba => ba.Type == BoatAttributeType._0);
         tAttribute.Value = (100 - fuel).ToString();
         tAttribute.Timestamp = DateTimeOffset.UtcNow;
+
+        var sAttribute = soppatorsk.BoatAttributes.Single(ba => ba.Type == BoatAttributeType._0);
+        sAttribute.Timestamp = DateTimeOffset.UtcNow;
+        var sAttribute1 = soppatorsk.BoatAttributes.Single(ba => ba.Type == BoatAttributeType._1);
+        sAttribute1.Timestamp = DateTimeOffset.UtcNow;
         bac.UpdateAsync(b);
         bac.UpdateAsync(t);
+        bac.UpdateAsync(soppatorsk);
         Console.WriteLine(fuel);
         Thread.Sleep(1000);
     }
