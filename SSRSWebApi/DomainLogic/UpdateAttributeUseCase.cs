@@ -13,20 +13,19 @@ namespace DomainLogic
         }
         public bool UpdateAttribute(SetAttributeRequest request)
         {
+            if (request.Attribute == null) return false;
             if (!request.Attribute.Type.IsReadOnly())
             {
                 if (_inmemoryStorage.Exists(request.BoatId))
                 {
                     var boat = _inmemoryStorage.GetBoatModel(request.BoatId);
                     var currentAttribute = boat.BoatAttributes.FirstOrDefault(x => x.Type == request.Attribute.Type);
-                    if (currentAttribute != null)
+                    if (currentAttribute == null) return false;
+                    if (currentAttribute.Timestamp < request.Attribute.Timestamp && currentAttribute?.Value != request.Attribute.Value && currentAttribute != null)
                     {
-                        if (currentAttribute.Timestamp < request.Attribute.Timestamp && currentAttribute?.Value != request.Attribute.Value)
-                        {
-                            currentAttribute.Value = request.Attribute.Value;
-                            currentAttribute.Timestamp = request.Attribute.Timestamp;
-                            return true;
-                        }
+                        currentAttribute.Value = request.Attribute.Value;
+                        currentAttribute.Timestamp = request.Attribute.Timestamp;
+                        return true;
                     }
                     return false;
                 }

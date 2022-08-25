@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace SSRSWebApi.Models
 {
@@ -21,16 +20,17 @@ namespace SSRSWebApi.Models
 
     public class BoatAttribute
     {
+        [EnumDataType(typeof(AttributeTypes))]
         public AttributeTypes Type { get; set; }
         [Required]
-        public string Value { get; set; }
+        public string Value { get; set; } = string.Empty;
         public DateTimeOffset Timestamp { get; set; }
     }
     public class BoatModel
     {
         [Required]
-        public string Id { get; set; }
-        public List<BoatAttribute> BoatAttributes { get; set; }
+        public string Id { get; set; } = string.Empty;
+        public List<BoatAttribute> BoatAttributes { get; set; } = new List<BoatAttribute>();
         public DateTimeOffset Timestamp { get; set; }
     }
 }

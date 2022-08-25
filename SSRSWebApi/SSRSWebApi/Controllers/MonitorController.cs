@@ -26,7 +26,11 @@ namespace SSRSWebApi.Controllers
                 var trimmedId = id.Trim();
                 if (_inmemoryStorage.Exists(trimmedId))
                 {
-                    result.Add(_inmemoryStorage.GetBoatModel(trimmedId));
+                    var boat = _inmemoryStorage.GetBoatModel(trimmedId);
+                    if (boat != null)
+                    {
+                        result.Add(boat);
+                    }
                 }
             }
             return result;

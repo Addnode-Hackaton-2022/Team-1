@@ -6,7 +6,7 @@ namespace SSRSWebApi.Domain
     public interface IInmemoryStorage
     {
         bool Exists(string id);
-        BoatModel GetBoatModel(string id);
+        BoatModel? GetBoatModel(string id);
         void UpsertBoat(BoatModel model);
         void Clear();
         List<BoatModel> GetAll();
@@ -20,7 +20,7 @@ namespace SSRSWebApi.Domain
         {
             return Boats.ContainsKey(id);
         }
-        public BoatModel GetBoatModel(string id)
+        public BoatModel? GetBoatModel(string id)
         {
             if (Boats.ContainsKey(id)) return Boats[id];
             return null;

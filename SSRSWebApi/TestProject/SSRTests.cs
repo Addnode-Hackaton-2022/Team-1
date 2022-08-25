@@ -144,6 +144,20 @@ namespace TestProject
             var result = updateBoatUseCase.UpdateBoat(model);
             Assert.Single(result.BoatAttributes);
         }
+        [Fact]
+        public void UpdateAttributeWithMissingAttribute_ShallFail()
+        {
+            var storage = GetStorage();
+            storage.Clear();
+            var model = CreateMock();
+            var updateBoatUseCase = new UpdateBoatUseCase(storage);
+            var _ = updateBoatUseCase.UpdateBoat(model);
+            var updateRequest = MockRequest(DateTimeOffset.Now.AddMinutes(20));
+            updateRequest.Attribute = null;
+            var subject = new UpdateAttributeUseCase(storage);
+            var result = subject.UpdateAttribute(updateRequest);
+            Assert.False(result);
+        }
 
 
         private BoatModel CreateMock()
