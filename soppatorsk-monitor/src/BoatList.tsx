@@ -17,7 +17,7 @@ export const BoatList = ({
         key={boat.id}
         onClick={() => onActiveBoatCallback(boat.id)}
       >
-        <BoatListItem id={boat.id} />
+        <BoatListItem boat={boat} />
       </div>
     )}
   />
