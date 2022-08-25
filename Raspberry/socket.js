@@ -108,7 +108,9 @@ function setAlarmLevel(val) {
 		ws.send(json);
 	}
 	else {
-		setAlarmLevel(val);
+		setTimeout(() => {
+			setAlarmLevel(val)
+		}, 2000)
 	}
 }
 
