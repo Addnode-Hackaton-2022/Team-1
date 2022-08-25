@@ -5,9 +5,7 @@ const cloud = require("./cloud.js");
 socket.readAttributeConfig();
 socket.connect();
 
-setTimeout(() => {
-    start()
-}, 2000)
+start()
 
 function start() {
     cloud.postDataToCloud(socket.getData());
