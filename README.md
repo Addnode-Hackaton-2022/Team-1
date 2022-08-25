@@ -136,3 +136,6 @@ Den totala tiden av presentation får ni distribuera som ni vill men den måste 
 # Cloud Server med Swagger 
 
 https://ssrswebapi20220824153938.azurewebsites.net/swagger/index.html
+
+# Monitor tool
+https://ambitious-flower-010394b03.1.azurestaticapps.net/
