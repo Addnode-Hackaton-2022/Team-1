@@ -24,7 +24,13 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// Allow everything for testing purposes...
+app.UseCors(builder => builder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .SetIsOriginAllowed((host) => true)
+    .AllowCredentials()
+);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

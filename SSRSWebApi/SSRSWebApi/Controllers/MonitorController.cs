@@ -1,5 +1,6 @@
 ﻿using DomainLogic;
 using DomainLogic.Common;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SSRSWebApi.Domain;
 using SSRSWebApi.Models;
@@ -22,9 +23,10 @@ namespace SSRSWebApi.Controllers
             var idList = boatIds.Split(',').ToList();
             foreach(var id in idList)
             {
-                if (_inmemoryStorage.Exists(id))
+                var trimmedId = id.Trim();
+                if (_inmemoryStorage.Exists(trimmedId))
                 {
-                    result.Add(_inmemoryStorage.GetBoatModel(id));
+                    result.Add(_inmemoryStorage.GetBoatModel(trimmedId));
                 }
             }
             return result;
@@ -36,10 +38,10 @@ namespace SSRSWebApi.Controllers
         {
             var updateAttributeUseCase = new UpdateAttributeUseCase(_inmemoryStorage);
             var result = updateAttributeUseCase.UpdateAttribute(request);
-            //if (!result)
-            //{
-            //    throw new BadRequestObjectResult ("Cannot update a read-only property");
-            //}
+            if (!result)
+            {
+                throw new BadHttpRequestException("Cannot update a read-only property");
+            }
             return result;
         }
 

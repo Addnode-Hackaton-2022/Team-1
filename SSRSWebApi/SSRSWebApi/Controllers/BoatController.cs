@@ -2,6 +2,7 @@
 using SSRSWebApi.Domain;
 using SSRSWebApi.Models;
 using DomainLogic;
+using Microsoft.AspNetCore.Cors;
 
 namespace SSRSWebApi.Controllers
 {
