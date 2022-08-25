@@ -17,7 +17,6 @@ namespace SSRSWebApi.Controllers
             _inmemoryStorage = inmemoryStorage;
         }
         [HttpGet]
-        [DisableCors]
         public List<BoatModel> GetBoats([FromQuery] string boatIds)
         {
             var result = new List<BoatModel>();
@@ -35,7 +34,6 @@ namespace SSRSWebApi.Controllers
 
         [HttpPost]
         [Route("setattribute")]
-        [DisableCors]
         public bool SetValue([FromBody] SetAttributeRequest request)
         {
             var updateAttributeUseCase = new UpdateAttributeUseCase(_inmemoryStorage);

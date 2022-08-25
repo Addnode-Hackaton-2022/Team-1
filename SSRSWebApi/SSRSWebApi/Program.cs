@@ -17,7 +17,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddSingleton<IInmemoryStorage, InmemoryStorage>();
 
 var app = builder.Build();
-app.UseCors();
 
 // Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
@@ -25,7 +24,13 @@ app.UseCors();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// Allow everything for testing purposes...
+app.UseCors(builder => builder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .SetIsOriginAllowed((host) => true)
+    .AllowCredentials()
+);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
