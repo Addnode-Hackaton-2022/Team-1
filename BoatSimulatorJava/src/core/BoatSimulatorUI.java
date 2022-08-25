@@ -153,9 +153,7 @@ public class BoatSimulatorUI extends JFrame
 
                     changeBoatValue();
                 }
-
             }
-
         };
 
         Thread thread = new Thread(myRunnable);
@@ -220,7 +218,6 @@ public class BoatSimulatorUI extends JFrame
         {
             iBoats.add(new Boat(boatNames[rand.nextInt(count)], this));
         }
-
     }
 
     private void btnStopClicked(ActionEvent e)
