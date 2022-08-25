@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using SSRSWebApi.Common;
+﻿using DomainLogic;
+using DomainLogic.Common;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using SSRSWebApi.Domain;
 using SSRSWebApi.Models;
 
@@ -9,6 +11,11 @@ namespace SSRSWebApi.Controllers
     [Route("[controller]")]
     public class MonitorController : ControllerBase
     {
+        private readonly IInmemoryStorage _inmemoryStorage;
+        public MonitorController(IInmemoryStorage inmemoryStorage)
+        {
+            _inmemoryStorage = inmemoryStorage;
+        }
         [HttpGet]
         public List<BoatModel> GetBoats([FromQuery] string boatIds)
         {
@@ -16,9 +23,10 @@ namespace SSRSWebApi.Controllers
             var idList = boatIds.Split(',').ToList();
             foreach(var id in idList)
             {
-                if (InmemoryStorage.Boats.TryGetValue(id, out var boat))
+                var trimmedId = id.Trim();
+                if (_inmemoryStorage.Exists(trimmedId))
                 {
-                    result.Add(boat);
+                    result.Add(_inmemoryStorage.GetBoatModel(trimmedId));
                 }
             }
             return result;
@@ -26,20 +34,15 @@ namespace SSRSWebApi.Controllers
 
         [HttpPost]
         [Route("setattribute")]
-        public void SetValue([FromBody] SetAttributeRequest request)
+        public bool SetValue([FromBody] SetAttributeRequest request)
         {
-            if (!request.Attribute.Type.IsReadOnly())
+            var updateAttributeUseCase = new UpdateAttributeUseCase(_inmemoryStorage);
+            var result = updateAttributeUseCase.UpdateAttribute(request);
+            if (!result)
             {
-                if (InmemoryStorage.Boats.TryGetValue(request.BoatId, out var boat))
-                {
-                    var currentAttribute = boat.BoatAttributes.FirstOrDefault(x => x.Type == request.Attribute.Type);
-                    if (currentAttribute?.Timestamp < request.Attribute.Timestamp && currentAttribute?.Value != request.Attribute.Value)
-                    {
-                        currentAttribute.Value = request.Attribute.Value;
-                        currentAttribute.Timestamp = request.Attribute.Timestamp;
-                    }
-                }
+                throw new BadHttpRequestException("Cannot update a read-only property");
             }
+            return result;
         }
 
     }

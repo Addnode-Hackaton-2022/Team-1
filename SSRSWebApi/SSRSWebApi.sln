@@ -5,7 +5,11 @@ VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SSRSWebApi", "SSRSWebApi\SSRSWebApi.csproj", "{380DA332-29C4-4446-A02B-178C606FA980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{EC2D9EC3-B102-4DA5-8F29-05D3DA9306E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject", "TestProject\TestProject.csproj", "{EC2D9EC3-B102-4DA5-8F29-05D3DA9306E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainModels", "DomainModels\DomainModels.csproj", "{826C21EE-71A7-4AEA-A3D4-612097DD50CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainLogic", "DomainLogic\DomainLogic.csproj", "{2829F42A-782F-4C40-AEF3-3281585D4680}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{EC2D9EC3-B102-4DA5-8F29-05D3DA9306E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC2D9EC3-B102-4DA5-8F29-05D3DA9306E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC2D9EC3-B102-4DA5-8F29-05D3DA9306E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{826C21EE-71A7-4AEA-A3D4-612097DD50CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{826C21EE-71A7-4AEA-A3D4-612097DD50CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{826C21EE-71A7-4AEA-A3D4-612097DD50CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{826C21EE-71A7-4AEA-A3D4-612097DD50CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2829F42A-782F-4C40-AEF3-3281585D4680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2829F42A-782F-4C40-AEF3-3281585D4680}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2829F42A-782F-4C40-AEF3-3281585D4680}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2829F42A-782F-4C40-AEF3-3281585D4680}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

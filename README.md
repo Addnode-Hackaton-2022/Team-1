@@ -55,9 +55,13 @@ Här skall sista commiten till repot vara gjord och den muntliga presentationen 
 ### Team
 
 #### Namn på medlemmar 
-* <namn.>
-* <namn.>
-* <osv...>
+* Marcus Alvén
+* Peter Fröberg
+* Jonathan Jonsson
+* Niklas Kling
+* Linus Mörtzell
+* Mikael Stalvik
+* Lars Svensson
 
 #### Hur har ni jobbat inom teamet? Har alla gjort samma eller har ni haft olika roller?
 <beskrivning.>

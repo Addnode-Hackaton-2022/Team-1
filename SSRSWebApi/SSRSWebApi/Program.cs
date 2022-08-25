@@ -1,3 +1,6 @@
+using Microsoft.OpenApi.Models;
+using SSRSWebApi.Domain;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,7 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SSRSWeb", Version = "v1" });
+    c.UseInlineDefinitionsForEnums();
+});
+
+builder.Services.AddSingleton<IInmemoryStorage, InmemoryStorage>();
 
 var app = builder.Build();
 
@@ -15,7 +24,13 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// Allow everything for testing purposes...
+app.UseCors(builder => builder
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .SetIsOriginAllowed((host) => true)
+    .AllowCredentials()
+);
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
