@@ -64,7 +64,7 @@ Här skall sista commiten till repot vara gjord och den muntliga presentationen 
 
 ### Övergripande beskrivning och val av utmaning
 
-<beskrivning här>
+Fjärrstyra uppkopplade båtar samt övervaka deras status. 
 
 ### Team
 
